@@ -1,0 +1,33 @@
+# Serves the static site inside the container. TLS is handled by the homelab's Caddy in front.
+{
+	admin off
+	auto_https off
+	persist_config off
+}
+
+:8080 {
+	root * /srv
+	encode zstd gzip
+
+	header {
+		-Server
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "DENY"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
+	}
+
+	# Images and icons rarely change; the stylesheet is revalidated so edits show up.
+	@static path *.png *.jpg *.jpeg *.gif *.webp *.svg *.ico
+	header @static Cache-Control "public, max-age=2592000"
+	header /styles.css Cache-Control "no-cache"
+
+	respond /healthz "ok" 200
+
+	handle_errors {
+		respond "{err.status_code} {err.status_text}"
+	}
+
+	file_server
+}
