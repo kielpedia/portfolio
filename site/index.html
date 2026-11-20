@@ -40,7 +40,7 @@
       "worksFor": { "@type": "Organization", "name": "Adyen", "url": "https://www.adyen.com" },
       "homeLocation": { "@type": "Place", "name": "Amsterdam, Netherlands" },
       "alumniOf": { "@type": "CollegeOrUniversity", "name": "Miami University" },
-      "knowsAbout": ["Java", "Platform engineering", "Payments", "Microservices", "Apache Cassandra", "Python"],
+      "knowsAbout": ["Java", "Kotlin", "Platform engineering", "Payments", "Microservices", "Apache Cassandra", "Python"],
       "sameAs": [
         "https://www.linkedin.com/in/kiel-loysen-96357135",
         "https://github.com/kielpedia"
@@ -192,6 +192,55 @@
           <figcaption># screenshots use a made-up household</figcaption>
         </figure>
       </article>
+
+      <div class="project-grid">
+        <article class="project">
+          <figure class="shot">
+            <img src="img/karlstodian.webp" alt="Karlstodian library page: titles ranked by removal score with size, age, plays and quality" width="1280" height="720" loading="lazy">
+          </figure>
+          <div class="project-text">
+            <p class="eyebrow">self-hosted app</p>
+            <h3>Karlstodian</h3>
+            <p>
+              Scores every movie and show in my Plex library as a removal candidate, so the disks
+              don't fill up with things nobody watches.
+            </p>
+            <ul>
+              <li><strong>Scoring.</strong> A 0–100 score from size, time on Plex, watch activity across all users, and quality, with live weight sliders and a per-title breakdown.</li>
+              <li><strong>Integrations.</strong> Joins data from Plex, Tautulli, Radarr, Sonarr and qBittorrent.</li>
+              <li><strong>Safe removal.</strong> Suggests titles but never removes on its own: approved ones sit in a Leaving Soon collection for 14 days, and torrents go only after their seed time.</li>
+              <li><strong>Delivery.</strong> Every merge ships a release that the server installs itself, with a health check and automatic rollback.</li>
+            </ul>
+            <p class="tags">kotlin · ktor · sqlite · docker · github actions</p>
+            <p><a class="btn ghost" href="https://github.com/kielpedia/karlstodian">view on github →</a></p>
+          </div>
+        </article>
+
+        <article class="project">
+          <figure class="shot">
+            <img src="img/thrustfall.webp" alt="Thrustfall match: four ships in a randomly generated cave" width="1280" height="720" loading="lazy">
+          </figure>
+          <div class="project-text">
+            <p class="eyebrow">game</p>
+            <h3>Thrustfall</h3>
+            <p>
+              A gravity spaceship brawler for up to four players. Your ship has one rear booster,
+              gravity always pulls you down, and one shot kills.
+            </p>
+            <ul>
+              <li><strong>Online play.</strong> Host-authoritative networking over ENet with client-side prediction; CPUs take over when a player drops.</li>
+              <li><strong>Random caves.</strong> Every map is generated, with adjustable gravity and open space.</li>
+              <li><strong>Modes.</strong> Rounds, stock and timed, plus teams, six power-ups and ten ship hulls with shape-accurate hitboxes.</li>
+              <li><strong>Releases.</strong> Tagging a version runs the self-tests and publishes a Windows build.</li>
+            </ul>
+            <p class="tags">godot 4 · gdscript · enet · github actions</p>
+            <p>
+              <a class="btn ghost" href="https://github.com/kielpedia/thrustfall">view on github →</a>
+              <a class="btn ghost" href="https://github.com/kielpedia/thrustfall/releases/latest">download →</a>
+            </p>
+          </div>
+        </article>
+      </div>
 
       <article class="project">
         <div class="project-text">

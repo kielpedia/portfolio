@@ -146,6 +146,11 @@ h3 { margin: 0; }
 }
 .project.feature { display: grid; grid-template-columns: 1fr 1.15fr; }
 .project-text { padding: 28px; }
+.project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.project-grid .project { margin-bottom: 0; }
+.project-grid .project-text p:last-child { margin-bottom: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.shot { margin: 0; background: var(--panel-2); border-bottom: 1px solid var(--line); padding: 16px 16px 0; }
+.shot img { width: 100%; height: auto; display: block; border-radius: 6px 6px 0 0; border: 1px solid var(--line); border-bottom: 0; }
 .project h3 { font-size: 24px; margin-bottom: 10px; }
 .project p { color: var(--soft); margin: 0 0 14px; }
 .project ul { margin: 0 0 16px; padding: 0; list-style: none; color: var(--soft); font-size: 15px; }
@@ -184,6 +189,6 @@ code { font-family: var(--mono); font-size: .88em; background: var(--line); padd
   .nav ul { gap: 14px; }
   .nav ul li:nth-child(3) { display: none; }
   .hero { padding: 64px 0 48px; }
-  .role, .project.feature { grid-template-columns: 1fr; gap: 8px; }
+  .role, .project.feature, .project-grid { grid-template-columns: 1fr; gap: 8px; }
   .term { border-left: 0; border-top: 1px solid var(--line); }
 }
