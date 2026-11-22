@@ -40,7 +40,8 @@ jobs:
           cache-to: type=gha,mode=max
       - name: Smoke test
         run: |
-          docker run -d --name portfolio -p 8080:8080 portfolio:test
+          # Same restrictions as the homelab's k3s pods: no capabilities, no privilege escalation, read-only root.
+          docker run -d --name portfolio -p 8080:8080 --cap-drop ALL --security-opt no-new-privileges --read-only --tmpfs /tmp portfolio:test
           for i in $(seq 1 15); do curl -fsS http://localhost:8080/healthz && break; sleep 1; done
           curl -fsS http://localhost:8080/ | grep -q "Kiel Loysen" || { docker logs portfolio; exit 1; }
       - uses: docker/login-action@v4
