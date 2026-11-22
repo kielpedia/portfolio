@@ -10,11 +10,16 @@ permissions:
 
 jobs:
   image:
-    # Builds and smoke-tests the image on every PR; publishes it to GHCR only from main.
+    # Builds and smoke-tests the image on every PR; publishes it to GHCR only from main, with a signed
+    # build-provenance attestation. A PR can change this file and push any tag (`:main` included), but it can't
+    # produce an attestation for refs/heads/main, so homelab-infra deploys only attested images
+    # (gh attestation verify --source-ref refs/heads/main --signer-workflow kielpedia/portfolio/.github/workflows/ci.yml).
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+      attestations: write
+      id-token: write
     steps:
       - uses: actions/checkout@v7
       - uses: docker/setup-buildx-action@v4
@@ -45,6 +50,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish
+        id: publish
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v7
         with:
@@ -53,3 +59,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
+      - name: Attest the main image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-name: ghcr.io/${{ github.repository }}
+          subject-digest: ${{ steps.publish.outputs.digest }}
+          push-to-registry: true
